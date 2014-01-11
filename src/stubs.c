@@ -40,8 +40,8 @@ int wn_findvalidsearches (ClientData clientData, Tcl_Interp *interp,
    char *morph;
    int pos;
    if (argc != 3) {
-      interp -> result = 
-         "usage: findvalidsearches searchword partofspeechnum";
+      Tcl_SetResult(interp,
+        "usage: findvalidsearches searchword partofspeechnum", 0);
       return TCL_ERROR;
    }
    pos = atoi (argv[2]);
@@ -52,7 +52,7 @@ int wn_findvalidsearches (ClientData clientData, Tcl_Interp *interp,
       } while ((morph = morphstr (NULL, pos)) != NULL);
    }
    sprintf (bitfieldstr, "%u", bitfield);
-   interp -> result = bitfieldstr;
+   Tcl_SetResult(interp, bitfieldstr, 0);
    return TCL_OK;
 }
 
@@ -69,13 +69,13 @@ int wn_bit (ClientData clientData, Tcl_Interp *interp,
    static char bitfieldstr[32];
    int whichbit;
    if (argc != 2) {
-      interp -> result = "usage: bit bitnum";
+      Tcl_SetResult(interp, "usage: bit bitnum", 0);
       return TCL_ERROR;
    }
    whichbit = atoi (argv[1]);
    bitfield = bit (whichbit);
    sprintf (bitfieldstr, "%u", bitfield);
-   interp -> result = bitfieldstr;
+   Tcl_SetResult(interp, bitfieldstr, 0);
    return TCL_OK;
 } 
 
@@ -89,8 +89,9 @@ int wn_search (ClientData clientData, Tcl_Interp *interp,
    int pos, searchtype, sense;
    char *morph;
    if (argc != 5) {
-      interp -> result = 
-         "usage: search searchword partofspeechnum searchtypenum sensenum";
+      Tcl_SetResult(interp,
+         "usage: search searchword partofspeechnum searchtypenum sensenum",
+          0);
       return TCL_ERROR;
    }
    pos = atoi (argv[2]);
@@ -102,7 +103,7 @@ int wn_search (ClientData clientData, Tcl_Interp *interp,
          strcat (resultbuf, findtheinfo (morph, pos, searchtype, sense));
       } while ((morph = morphstr (NULL, pos)) != NULL);
    }
-   interp -> result = resultbuf;
+   Tcl_SetResult(interp, resultbuf, 0);
    return TCL_OK;
 }
 
@@ -114,7 +115,7 @@ int wn_search (ClientData clientData, Tcl_Interp *interp,
 int wn_glosses (ClientData clientData, Tcl_Interp *interp,
    int argc, char *argv[]) {
    if (argc != 2) {
-      interp -> result = "usage: glosses [1 | 0]";
+      Tcl_SetResult(interp, "usage: glosses [1 | 0]", 0);
       return TCL_ERROR;
    }
    dflag = atoi (argv[1]);
@@ -129,7 +130,7 @@ int wn_glosses (ClientData clientData, Tcl_Interp *interp,
 int wn_fileinfo (ClientData clientData, Tcl_Interp *interp,
    int argc, char *argv[]) {
    if (argc != 2) {
-      interp -> result = "usage: fileinfo [1 | 0]";
+      Tcl_SetResult(interp, "usage: fileinfo [1 | 0]", 0);
       return TCL_ERROR;
    }
    fileinfoflag = atoi (argv[1]);
@@ -144,7 +145,7 @@ int wn_fileinfo (ClientData clientData, Tcl_Interp *interp,
 int wn_byteoffset (ClientData clientData, Tcl_Interp *interp,
    int argc, char *argv[]) {
    if (argc != 2) {
-      interp -> result = "usage: byteoffset [1 | 0]";
+      Tcl_SetResult(interp, "usage: byteoffset [1 | 0]", 0);
       return TCL_ERROR;
    }
    offsetflag = atoi (argv[1]);
@@ -159,7 +160,7 @@ int wn_byteoffset (ClientData clientData, Tcl_Interp *interp,
 int wn_senseflag (ClientData clientData, Tcl_Interp *interp,
    int argc, char *argv[]) {
    if (argc != 2) {
-      interp -> result = "usage: senseflag [1 | 0]";
+      Tcl_SetResult(interp, "usage: senseflag [1 | 0]", 0);
       return TCL_ERROR;
    }
    wnsnsflag = atoi (argv[1]);
@@ -175,12 +176,12 @@ int wn_contextualhelp (ClientData clientData, Tcl_Interp *interp,
    int argc, char *argv[]) {
    int pos, searchtype;
    if (argc != 3) {
-      interp -> result = "usage: contextualhelp partofspeechnum searchtypenum";
+      Tcl_SetResult(interp, "usage: contextualhelp partofspeechnum searchtypenum", 0);
       return TCL_ERROR;
    }
    pos = atoi (argv[1]);
    searchtype = atoi (argv[2]);
-   interp -> result = helptext[pos][searchtype];
+   Tcl_SetResult(interp, helptext[pos][searchtype], 0);
    return TCL_OK;
 }
 
@@ -190,7 +191,7 @@ int wn_contextualhelp (ClientData clientData, Tcl_Interp *interp,
 int wn_reopendb (ClientData clientData, Tcl_Interp *interp,
    int argc, char *argv[]) {
    if (argc != 1) {
-      interp -> result = "usage: reopendb";
+      Tcl_SetResult(interp, "usage: reopendb", 0);
       return TCL_ERROR;
    }
    re_wninit ();
@@ -204,7 +205,7 @@ int wn_reopendb (ClientData clientData, Tcl_Interp *interp,
 int wn_abortsearch (ClientData clientData, Tcl_Interp *interp,
    int argc, char *argv[]) {
    if (argc != 1) {
-      interp -> result = "usage: abortsearch";
+      Tcl_SetResult(interp, "usage: abortsearch", 0);
       return TCL_ERROR;
    }
    abortsearch = 1;
