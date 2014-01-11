@@ -1,6 +1,16 @@
 
 		This is the README file for WordNet 3.0
 
+0. About this fork
+
+This fork is based on the source code downloaded from
+http://wordnetcode.princeton.edu/3.0/WordNet-3.0.tar.gz on 2014-01-11T17:53Z.
+The sha512sum of the file is
+9539bc016d710f31d65072bbf5068edffcd735978d8cc6f1b361b19428b97546ef6c7e246e1b6f2ff4557a0885a8305341e35173a6723f0740dda18d097ca248.
+
+The fork is made for the purposes of maintenance as no active development of
+WordNet seems to be going on.
+
 1. About WordNet
 
 WordNet was developed at Princeton University's Cognitive Science
